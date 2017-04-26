@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "#Ori Rosen Code for Simulation\nlibrary(pscl)\nlibrary(BayesSpec)\nset.seed(346)\nphi_true <- matrix(list(),3,1)\nphi_true[[1]] <- .9\nphi_true[[2]] <- c(1.69, -.81)\nphi_true[[3]] <- c(1.32, -.81)\nsd_true <- rep(1,3)\nx1 <- arima.sim(list(order=c(1,0,0), ar=phi_true[[1]]),512,sd=sd_true[1])\nx2 <- arima.sim(list(order=c(2,0,0), ar=phi_true[[2]]),256,sd=sd_true[2])\nx3 <- arima.sim(list(order=c(2,0,0), ar=phi_true[[3]]),256,sd=sd_true[3])\nx <- c(x1, x2, x3)\nplot.ts(x)\nsimulated_piecewise <- x\nsave(simulated_piecewise, file = \"simulated_piecewise.rda\")\n\n# Compute the corresponding true spectral densities\ntrue_spec_dens <- matrix(list(),3,1)\nfor (j in 1:3){\n  true_spec_dens[[j]] <- arma.spec(ar=phi_true[[j]],var.noise = sd_true[j]^2,log=\"no\")\n}\nmodel <- adaptspec(2000,500,10,simulated_piecewise)\n\n# Creating 3D surface plots for adaptspec\nlibrary(geoR)\ndata(elevation)\nView(elevation)\nelevation.df <- data.frame(\n  x = 50 * elevation$coords[,\"x\"],\n  y = 50 * elevation$coords[,\"y\"],\n  z = 10 * elevation$data)\n)\nelevation.loes <- loess(z ~ x * y, data = elevation.df, degree = 2, span = 0.25)\nelevation.fit <- expand.grid(list(x = seq(10, 300, 5), y = seq(10, 300, 5)))\nz = predict(elevation.loes, newdata = elevation.fit)\npersp(seq(10, 300, 5), seq(10, 300, 5), z)\n\nstr(model)\n\n# Surface plot R\ngrid <- matrix(0, model$nfreq_hat+1, model$nobs)\nfor (p = 1:model$nloop) {\n  if (p > model$nwarmup) {\n    model$xi_curr = model$xi[model$nexp_curr[p]]\n  }\n}\n\n\n\n# Checking the time for adaptspec example\n\ntime_1 <- Sys.time()\ndata(simulated_piecewise)\nmodel1 <- adaptspec(nloop = 80, nwarmup = 20,\n  nexp_max = 5, x = simulated_piecewise[1:100])\nstr(model1)\nsummary(model1$nexp_curr)\nplot(model1$nexp_curr)\ntime_2 <- Sys.time()\ntime_1\ntime_2\ntime_2 - time_1\n",
+    "created" : 1475125928034.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "2374102965",
+    "id" : "86DB3A0B",
+    "lastKnownWriteTime" : 4318147824,
+    "last_content_update" : 1487718337127,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "source_window_id" : "",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

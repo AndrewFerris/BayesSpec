@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "Package: BayesSpec\nType: Package\nTitle: Bayesian Spectral Analysis Techniques\nVersion: 0.5.3\nAuthor: Rosen, O., Wood, S. and Stoffer, D.\nMaintainer: Andrew Ferris <andrew.ferris@sydney.edu.au>\nDescription: An implementation of methods for spectral analysis using the Bayesian framework. It includes functions for modelling spectrum as well as appropriate plotting and output estimates. There is segmentation capability with RJ MCMC (Reversible Jump Markov Chain Monte Carlo). The package takes these methods predominantly from the 2012 paper \"AdaptSPEC: Adaptive Spectral Estimation for Nonstationary Time Series\" <DOI:10.1080/01621459.2012.716340>.\nImports:\n  mvtnorm (>= 1.0-5),\n  pscl (>= 1.4.9),\n  trust (>= 0.1-7)\nLicense: GPL-3\nLazyLoad: TRUE\nLazyData: TRUE\nRoxygenNote: 6.0.1\n",
+    "created" : 1487202399145.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1946695474",
+    "id" : "D8044348",
+    "lastKnownWriteTime" : 1487423691,
+    "last_content_update" : 1487423797283,
+    "path" : "~/Documents/BayesSpec/DESCRIPTION",
+    "project_path" : "DESCRIPTION",
+    "properties" : {
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "dcf"
+}
